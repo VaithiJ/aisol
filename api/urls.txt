@@ -1,0 +1,23 @@
+all tokens by creator = https://frontend-api.pump.fun/coins/user-created-coins/BoaaUDC1i3GnAN26M8d2sBKfk28LAn56LLAyctVoCrh2?limit=100&offset=1&includeNsfw=true
+followers for the creator = https://frontend-api.pump.fun/following/followers/2ZvYvYic48qirMLNNTmz2ttPof59r765WgAHNArJvMYy
+other tokens held by the creator = https://frontend-api.pump.fun/balances/2ZvYvYic48qirMLNNTmz2ttPof59r765WgAHNArJvMYy?offset=1&limit=20&minBalance=0
+user details = https://frontend-api.pump.fun/users/2ZvYvYic48qirMLNNTmz2ttPof59r765WgAHNArJvMYy
+
+
+
+get all the tokens
+get kohl
+get a single token details
+all tokens created by the creator
+details of every user
+followers for the creator(gives details of the followers of the creators)
+other tokens held by the creator
+
+
+-----------------------------------
+
+getAllTokens - getAllTokens.js
+getTokenInfo.js - https://solana.p.nadles.com/tokens/latest
+get kohl - getKohl.js
+all tokens created by creator
+creator/user details
