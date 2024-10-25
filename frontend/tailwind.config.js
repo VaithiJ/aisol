@@ -26,8 +26,9 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {
-        jersey: ['"Jersey 15"', 'sans-serif'],
-      },
+        pressStart: ['"Press Start 2P"', 'cursive'],
+        vt323: ['"VT323"', 'monospace'],
+            },
       keyframes: {
         aurora: {
           from: {

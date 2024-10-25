@@ -8,6 +8,16 @@
 }
 
 @font-face {
+  font-family: "Press Start 2P";
+  src: url(./../public/Fonts/PressStart2P-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "VT323";
+  src: url(./../public/Fonts/VT323-Regular.ttf) format("truetype");
+}
+
+@font-face {
   font-family: "Radio Canada Big";
   src: url(./../public/Fonts/RadioCanadaBig-VariableFont_wght.ttf)
     format("truetype");
@@ -100,6 +110,59 @@ body {
 
 .lato {
   font-family: "Lato";
+}
+.neon-button {
+  position: relative;
+  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.neon-button:hover {
+  box-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00;
+}
+
+.bg-green-300 {
+  background-color: #00ff00; /* Neon green */
+}
+
+.bg-yellow-300 {
+  background-color: #ffea00; /* Neon yellow */
+}
+
+.matrix-loader {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.matrix-column {
+  display: flex;
+  flex-direction: column;
+  color: #00ff00;
+  font-family: 'VT323', monospace;
+  animation: fall 1s linear infinite;
+}
+
+.matrix-character {
+  opacity: 0.1;
+  animation: blink 0.5s linear infinite alternate;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .alata {

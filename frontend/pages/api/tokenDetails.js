@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         method: 'GET',
         headers: {
           'applicationType': 'JSON',
-          'X-Billing-Token': process.env.TOKEN2
+          'X-Billing-Token': process.env.TOKEN
         }
       });
   

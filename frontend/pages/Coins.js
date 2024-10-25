@@ -145,11 +145,11 @@ const CoinList = () => {
   useEffect(() => {
     fetchData(); // Fetch data initially
 
-    const interval = setInterval(() => {
-      fetchData(); // Polling every 5 seconds
-    }, 5000);
+    // const interval = setInterval(() => {
+    //   fetchData(); // Polling every 5 seconds
+    // }, 5000);
 
-    return () => clearInterval(interval); // Clean up interval when component unmounts
+    // return () => clearInterval(interval); // Clean up interval when component unmounts
   }, []);
 
   const indexOfLastToken = currentPage * tokensPerPage;

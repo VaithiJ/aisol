@@ -34,6 +34,7 @@ parentPort.on('message', (data) => {
     bundled = true;
   }
 
+
   const totalPercentage = holdersWithPercentage.reduce((sum, holder) => sum + holder.percentage, 0);
   let distro;
   if (totalPercentage > 20) {
@@ -78,15 +79,15 @@ parentPort.on('message', (data) => {
 
   let apeMessage;
   if (totalPoints >= 40) {
-    apeMessage = "Mr Punk's Play! 🤑";
+    apeMessage = "best";
   } else if (totalPoints >= 30) {
-    apeMessage = "Ansem Play! 💰";
+    apeMessage = "better";
   } else if (totalPoints >= 20) {
-    apeMessage = "Mitch's Play! 😎";
+    apeMessage = "good";
   } else if (totalPoints >= 10) {
-    apeMessage = "6ix9ine Play! ☠️";
+    apeMessage = "bad";
   } else {
-    apeMessage = "Yugu's play! 💩";
+    apeMessage = "dead";
   }
 
   parentPort.postMessage({
@@ -95,6 +96,11 @@ parentPort.on('message', (data) => {
     totalPoints,
     apeMessage,
     distro,
+    name: token.token.symbol,
+    description: token.token.description,
     life,
+    ca:token.token.mint,
+    shouldTweet: totalPoints > 25 // Add this line
+
   });
 });
