@@ -54,7 +54,7 @@ async function postTweet(ca, totalPoints, bundled, distro, life, name, descripti
         message = "Risky.";
       }
     } else if (life === "Almost Dead") {
-      message = "Too risky to ape.";
+      message = "Too risky.";
     } else if (life === "Dead") {
       message = "Rugged.";
     } else {

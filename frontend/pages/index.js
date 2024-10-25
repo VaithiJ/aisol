@@ -1,20 +1,14 @@
 
 
 import React, { useEffect, useState } from 'react';
-import Navbar from '@/components/smartaudit/Navbar';
 import { FaCopy, FaInfoCircle, FaTwitter, FaTelegram, FaGlobe } from 'react-icons/fa'; // Import social icons
-import NavBar2 from '@/components/smartaudit/NavBar2.js';
-import { GridBackgroundDemo } from '@/components/smartaudit/ui/GridDemo';
 import MatrixEffect from './MatrixEffect';
 
 const CoinList = () => {
   const [tokens, setTokens] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const tokensPerPage = 32;
-  const [selectedToken, setSelectedToken] = useState(null);
-  const [holdersData, setHoldersData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [loadingToken, setLoadingToken] = useState(null); // Track loading per token
   const [showModal, setShowModal] = useState(false); // Show modal state
   const [modalToken, setModalToken] = useState(null); // Token data for modal
   const [modalData, setModalData] = useState(null);
@@ -79,6 +73,7 @@ const CoinList = () => {
       setLoadingMessage(loadingTexts[Math.floor(Math.random() * loadingTexts.length)]);
     }
   }, [showModal]);
+
   useEffect(() => {
     // Simulate AI fetching process and manage dots animation
     const loadingInterval = setInterval(() => {
@@ -92,6 +87,8 @@ const CoinList = () => {
 
     return () => clearInterval(loadingInterval);
   }, []);
+
+
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
   };
@@ -170,24 +167,7 @@ const CoinList = () => {
 
 
 
-  const handleViewHolderPercentages = async (mint, tokenSupply) => {
-    setLoadingToken(mint); // Set the loading state only for the clicked token
-    try {
-      const response = await fetch(`/api/topHolders?mint=${mint}&tokenSupply=${tokenSupply}`);
-      const data = await response.json();
-  
-      if (Array.isArray(data)) {
-        setHoldersData(data);
-        setSelectedToken(mint);
-      } else {
-        throw new Error('Unexpected response structure');
-      }
-    } catch (error) {
-      console.error('Error fetching holder percentages:', error);
-    } finally {
-      setLoadingToken(false); // Set the loading state only for the clicked token
-    }
-  };
+
 
   const handleViewScore = async (token) => {
     setIsLoading(true);
@@ -238,42 +218,20 @@ const CoinList = () => {
     }
   };
 
-  const formatSupply = (supply, decimals) => {
-  
-    // Ensure supply and decimals are numbers
-    const supplyNumber = Number(supply);
-    const decimalsNumber = Number(decimals);
-  
-    if (isNaN(supplyNumber) || isNaN(decimalsNumber)) {
-      return 'Invalid supply or decimals';
-    }
-  
-    // If decimals is 9 or greater, return the supply as is
-    if (decimalsNumber >= 9) {
-      return supplyNumber.toLocaleString();
-    }
-  
-    // Calculate the divisor based on decimals
-    const divisor = Math.pow(10, decimalsNumber);
-  
-    // Adjust the supply
-    const adjustedSupply = supplyNumber / divisor;
-  
-    // Format the supply with comma separators and no decimal places
-    return adjustedSupply.toFixed(0).toLocaleString();
-  };
 
   return (
     <>
     <MatrixEffect />
     <div className="w-full min-h-screen relative">
       <canvas id="matrixCanvas" className="absolute top-0 left-0 w-full h-full z-0"></canvas>
-      
       {/* Set a transparent background to allow the Matrix effect to show through */}
       <div className="relative z-10 min-h-screen bg-black bg-opacity-50 pt-20 flex flex-col justify-center items-center">
-      <h1 className="text-green-500 text-8xl font-vt323 bg-black bg-opacity-40 backdrop-blur-lg border border-opacity-30 border-green-500 p-4 rounded-lg">
+        
+      <h1 className="text-green-500 text-8xl font-vt323 bg-black bg-opacity-40 backdrop-blur-lg border border-opacity-30 border-green-500 p-4 rounded-lg flex items-center">
+  <img src="/images/dppp.png" alt="Senti's logo" className="w-20 h-20 mr-4" />
   Senti's Sandbox
 </h1>
+
   
         {/* Initial Loader */}
         {initialLoading ? (
@@ -283,6 +241,8 @@ const CoinList = () => {
               </p>
             </div>
           ) : (
+            <div>
+
 <div className="relative grid mt-32 md:mt-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 items-start w-full bg-transparent py-10 px-4">
 {currentTokens.map((token, index) => (
   <div
@@ -408,7 +368,7 @@ const CoinList = () => {
         className="bg-green-300 text-black font-vt323 py-2 px-4 rounded"
         aria-label="View Score"
       >
-        Analyse?
+        Analyse
       </button>
     </div>
 
@@ -439,29 +399,37 @@ const CoinList = () => {
 
 
           {/* Pagination Buttons */}
-          <div className="flex justify-center mt-8 font-vt323 space-x-4">
-            <button
-              onClick={prevPage}
-              className={`px-4 py-2 text-white font-vt323 bg-green-300 rounded ${
-                currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <button
-              onClick={nextPage}
-              className={`px-4 py-2 text-white bg-yellow-300 rounded ${
-                currentPage >= Math.ceil(tokens.length / tokensPerPage)
-                  ? 'opacity-50 cursor-not-allowed'
-                  : ''
-              }`}
-              disabled={currentPage >= Math.ceil(tokens.length / tokensPerPage)}
-            >
-              Next
-            </button>
-          </div>
+        
+
+
+
         </div>
+
+        <div className="flex justify-center items-center mt-8 font-vt323">
+  <button
+    onClick={prevPage}
+    className={`px-4 py-2 text-green-300 bg-black border border-green-300 rounded ${
+      currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''
+    }`}
+    disabled={currentPage === 1}
+  >
+    &lt;
+  </button>
+  <button
+    onClick={nextPage}
+    className={`px-4 py-2 text-green-300 bg-black border border-green-300 rounded ${
+      currentPage >= Math.ceil(tokens.length / tokensPerPage)
+        ? 'opacity-50 cursor-not-allowed'
+        : ''
+    }`}
+    disabled={currentPage >= Math.ceil(tokens.length / tokensPerPage)}
+  >
+    &gt;
+  </button>
+</div>
+
+
+</div>
         
       )}
 
@@ -537,7 +505,7 @@ const CoinList = () => {
                     </p>
               </div>
               <div className="text-xs">
-                <p><span className="font-semibold text-green-400">Top 5 Distribution:</span> {modalData?.distro || 'N/A'}</p>
+                <p><span className="font-semibold text-green-400">Top 5 Disto:</span> {modalData?.distro || 'N/A'}</p>
               </div>
             </div>
 
